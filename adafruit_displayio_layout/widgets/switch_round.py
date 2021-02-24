@@ -45,6 +45,7 @@ from adafruit_displayio_layout.widgets.easing import BackEaseInOut as easing
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_DisplayIO_Layout.git"
 
+<<<<<<< HEAD
 
 class SwitchRound(Widget, Control):
     """A horizontal sliding switch widget.
@@ -273,6 +274,82 @@ class SwitchRound(Widget, Control):
     **Don't let any of these class definitions hold you back, let your imagination run
     wild and make some cool widgets!**
 
+=======
+
+class SwitchRound(Widget, Control):
+    """A horizontal sliding switch widget.  The origin is set using ``x`` and ``y``.
+
+        :param int x: pixel position
+        :param int y: pixel position
+        :param int width: width of the switch in pixels, set to ``None`` to auto-size
+         relative to the height
+        :param int height: height of the switch in pixels
+        :param float anchor_point: (X,Y) values from 0.0 to 1.0 to define the anchor
+         point relative to the switch bounding box
+        :param int anchored_position: (x,y) pixel value for the location
+         of the anchor_point
+        :param fill_color_off: switch off-state fill color (RGB tuple
+         or 24-bit hex value)
+        :param fill_color_on: switch on-state fill color (RGB tuple or
+         24-bit hex value)
+        :param outline_color_off: switch off-state outline color (RGB
+         tuple or 24-bit hex value)
+        :param outline_color_on: switch on-state outline color (RGB tuple
+         or 24-bit hex value)
+        :param background_color_off: background off-state color (RGB tuple
+         or 24-bit hex value)
+        :param background_color_on: background on-state color (RGB tuple
+         or 24-bit hex value)
+        :param background_outline_color_off: background outline off-state
+         color (RGB tuple or 24-bit hex value)
+        :param background_outline_color_on: background outline on-state
+         color (RGB tuple or 24-bit hex value)
+        :param int switch_stroke: outline stroke width for the switch, in pixels
+        :param int text_stroke: outline stroke width for the 0/1 text, in pixels
+        :param Boolean display_button_text: Set True to display the 0/1 text
+         on the sliding switch
+        :param float animation_time: time for the switching animation, in seconds
+         a value of 0.2 is a good starting point
+
+    Details of the `SwitchRound` widget
+
+        The `SwitchRound` widget is a graphical element that responds to touch elements
+        to provide sliding switch on/off behavior.  Whenever touched, the switch toggles
+        to its alternate value. The following sections describe the construction of the
+        `SwitchRound` widget, in the hopes that it will serve as an example of the key
+        properties and responses for widgets.
+
+        The `SwitchRound` widget inherits from two classes, it is a subclass of Group->Widget
+        and a sublcass of Control.  The `Widget` class helps define the positioning and
+        sizing of the switch, while the `Control` class defines the touch-response behavior.
+
+    Group structure: Display elements that make up SwitchRound
+
+    Coordinate systems:
+    See the `Widget` class definition
+
+    Construction sequence:
+    - Build stationary items
+    - Build moving items
+    - Store initial position
+    - Define "keyframes" and/or translation vector
+    - Define draw position function (0.0 to 1.0 and beyond)
+    - Define motion "easing" function
+
+    Translation, keyframes, motion functions and easing, and animation time handling.
+    Resizing with constraints
+    Orientation - peculiarity of width and height
+    Bounding box - see Widget class definition
+    Touch boundary, touch-padding - see Widget class definition
+
+    Class structure - review if inheritance is captured in the documentation
+
+    Highlight options:
+    - orientation
+    - touch-padding
+    - text on switch
+    - Coloring
+>>>>>>> 9275175 (Update switch_round for new Widget and Control definitions)
 
     """
 
@@ -552,6 +629,12 @@ class SwitchRound(Widget, Control):
         # Draw the position of the slider.
         # The position parameter is a float between 0 and 1 (0= off, 1= on).
 
+<<<<<<< HEAD
+=======
+        # apply the "easing" function to the requested position to adjust motion
+        position = easing(position)
+
+>>>>>>> 9275175 (Update switch_round for new Widget and Control definitions)
         # Get the position offset from the motion function
         x_offset, y_offset, _ = self._get_offset_position(
             position
