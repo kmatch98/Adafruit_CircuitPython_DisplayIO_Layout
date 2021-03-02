@@ -20,3 +20,7 @@
    :members:
    :inherited-members:
    :member-order: bysource
+
+.. inheritance-diagram:: adafruit_displayio_layout.widgets.switch_round
+
+

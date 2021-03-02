@@ -45,7 +45,6 @@ from adafruit_displayio_layout.widgets.easing import BackEaseInOut as easing
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_DisplayIO_Layout.git"
 
-<<<<<<< HEAD
 
 class SwitchRound(Widget, Control):
     """A horizontal sliding switch widget.
@@ -95,7 +94,130 @@ class SwitchRound(Widget, Control):
      value is 0.2 seconds.
     :param Boolean value: the initial value for the switch, default is False
 
+
+    **Basics of importing and using SwitchRound**
+
+    Here is one way of importing the `SwitchRound` class so you can use it as the name "Switch":
+
+    .. code-block:: python
+
+        from adafruit_displayio_layout.widgets.switch_round import SwitchRound as Switch
+
+    Now you can instance a switch using:
+
+    .. code-block:: python
+
+        my_switch=Switch(20, 30) # instance the switch at x=20, y=30
+
+    This will create a switch with all the default settings and positioned at pixel position of
+    x=20, y=30. Once you setup your display, you can now add *my_switch* to your display using:
+
+    .. code-block:: python
+
+        display.show(my_switch) # add the group to the display
+
+    If you want to have multiple display elements, you can create a group and then append the switch
+    and the other elements to the group.  Then, you can add the full group to the display as in
+    this example x:
+
+    .. code-block:: python
+
+        my_switch = Switch(20, 30) # instance the switch at x=20, y=30
+        my_group = displayio.Group(max_size=10) # make a group that can hold 10 items
+        my_group.append(my_switch) # Add my_switch to the group
+
+        #
+        # Append other display elements to the group
+        #
+
+        display.show(my_group) # add the group to the display
+
+
     **SwitchRound Features**
+
+    The `SwitchRound` widget has several options for controlling its position, visible appearance,
+    orientation, animation speed and value:
+
+    - **position**: ``x``, ``y`` or ``anchor_point`` and ``anchored_position``
+
+    - **size**: ``width`` and ``height`` (**Recommendation**: Leave ``width = None`` to use
+      the preferred switch aspect ratio)
+
+    - **orientation and movement direction (on vs. off)**: ``horizontal`` and ``flip``
+
+    - **switch color**: ``fill_color_off``, ``fill_color_on``, ``outline_color_off`` and ``outline_color_on``
+
+    - **background color**: ``background_color_off``, ``background_color_on``, ``background_outline_color_off``,
+      and ``background_outline_color_on``
+
+    - **line widths**: ``switch_stroke`` and ``text_stroke``
+
+    - **The 0/1 text display**: Set ``display_button_text = True``
+
+    **Basics of importing and using SwitchRound**
+
+    Here is one way of importing the `SwitchRound` class so you can use it as the name "Switch":
+
+    .. code-block:: python
+
+        from adafruit_displayio_layout.widgets.switch_round import SwitchRound as Switch
+
+    Now you can instance a switch using:
+
+    .. code-block:: python
+
+        my_switch=Switch(20, 30) # instance the switch at x=20, y=30
+
+    This will create a switch with all the default settings and positioned at pixel position of
+    x=20, y=30. Once you setup your display, you can now add *my_switch* to your display using:
+
+    .. code-block:: python
+
+        display.show(my_switch) # add the group to the display
+
+    If you want to have multiple display elements, you can create a group and then append the switch
+    and the other elements to the group.  Then, you can add the full group to the display as in
+    this example x:
+
+    .. code-block:: python
+
+        my_switch = Switch(20, 30) # instance the switch at x=20, y=30
+        my_group = displayio.Group(max_size=10) # make a group that can hold 10 items
+        my_group.append(my_switch) # Add my_switch to the group
+
+        #
+        # Append other display elements to the group
+        #
+
+        display.show(my_group) # add the group to the display
+
+
+    **SwitchRound Features**
+
+    The `SwitchRound` widget has several options for controlling its position, visible appearance,
+    orientation, animation speed and value:
+
+    **position**: ``x``, ``y`` or ``anchor_point`` and ``anchored_position``
+
+
+    **size**: ``width`` and ``height`` (recommend to leave ``width`` = None to use preferred aspect ratio)
+
+    **orientation and movement direction (on vs. off)**: ``horizontal`` and ``flip``
+
+    **switch color**: ``fill_color_off``, ``fill_color_on``, ``outline_color_off`` and ``outline_color_on``
+
+    **background color**: ``background_color_off``, ``background_color_on``, ``background_outline_color_off``,
+    and ``background_outline_color_on``
+
+    **linewidths**: ``switch_stroke`` and ``text_stroke``
+
+    **0/1 display**: Set ``display_button_text`` = True if you want the 0/1 shapes to show on the switch
+
+    **animation**: set ``animation_time`` to set the duration (in seconds) it will take to transition the
+    switch, set zero if you want it to snap into position immediately (0.2 seconds is a good starting point,
+    and larger values for bigger switches)
+
+    **value**: set ``value`` to the initial value (True or False)
 
     The `SwitchRound` widget is a sliding switch that changes state whenever it is
     touched.  The color gradually changes from the off-state color scheme to the
@@ -117,7 +239,7 @@ class SwitchRound(Widget, Control):
     as an introductory guide to using the `Widget` and `Control` classes for create
     touch-responsive graphical user interface widgets.
 
-    **Details of the SwitchRound widget**
+    **Internal details: How the SwitchRound widget works**
 
     The `SwitchRound` widget is a graphical element that responds to touch elements
     to provide sliding switch on/off behavior.  Whenever touched, the switch toggles
@@ -274,83 +396,6 @@ class SwitchRound(Widget, Control):
     **Don't let any of these class definitions hold you back, let your imagination run
     wild and make some cool widgets!**
 
-=======
-
-class SwitchRound(Widget, Control):
-    """A horizontal sliding switch widget.  The origin is set using ``x`` and ``y``.
-
-        :param int x: pixel position
-        :param int y: pixel position
-        :param int width: width of the switch in pixels, set to ``None`` to auto-size
-         relative to the height
-        :param int height: height of the switch in pixels
-        :param float anchor_point: (X,Y) values from 0.0 to 1.0 to define the anchor
-         point relative to the switch bounding box
-        :param int anchored_position: (x,y) pixel value for the location
-         of the anchor_point
-        :param fill_color_off: switch off-state fill color (RGB tuple
-         or 24-bit hex value)
-        :param fill_color_on: switch on-state fill color (RGB tuple or
-         24-bit hex value)
-        :param outline_color_off: switch off-state outline color (RGB
-         tuple or 24-bit hex value)
-        :param outline_color_on: switch on-state outline color (RGB tuple
-         or 24-bit hex value)
-        :param background_color_off: background off-state color (RGB tuple
-         or 24-bit hex value)
-        :param background_color_on: background on-state color (RGB tuple
-         or 24-bit hex value)
-        :param background_outline_color_off: background outline off-state
-         color (RGB tuple or 24-bit hex value)
-        :param background_outline_color_on: background outline on-state
-         color (RGB tuple or 24-bit hex value)
-        :param int switch_stroke: outline stroke width for the switch, in pixels
-        :param int text_stroke: outline stroke width for the 0/1 text, in pixels
-        :param Boolean display_button_text: Set True to display the 0/1 text
-         on the sliding switch
-        :param float animation_time: time for the switching animation, in seconds
-         a value of 0.2 is a good starting point
-
-    Details of the `SwitchRound` widget
-
-        The `SwitchRound` widget is a graphical element that responds to touch elements
-        to provide sliding switch on/off behavior.  Whenever touched, the switch toggles
-        to its alternate value. The following sections describe the construction of the
-        `SwitchRound` widget, in the hopes that it will serve as an example of the key
-        properties and responses for widgets.
-
-        The `SwitchRound` widget inherits from two classes, it is a subclass of Group->Widget
-        and a sublcass of Control.  The `Widget` class helps define the positioning and
-        sizing of the switch, while the `Control` class defines the touch-response behavior.
-
-    Group structure: Display elements that make up SwitchRound
-
-    Coordinate systems:
-    See the `Widget` class definition
-
-    Construction sequence:
-    - Build stationary items
-    - Build moving items
-    - Store initial position
-    - Define "keyframes" and/or translation vector
-    - Define draw position function (0.0 to 1.0 and beyond)
-    - Define motion "easing" function
-
-    Translation, keyframes, motion functions and easing, and animation time handling.
-    Resizing with constraints
-    Orientation - peculiarity of width and height
-    Bounding box - see Widget class definition
-    Touch boundary, touch-padding - see Widget class definition
-
-    Class structure - review if inheritance is captured in the documentation
-
-    Highlight options:
-    - orientation
-    - touch-padding
-    - text on switch
-    - Coloring
->>>>>>> 9275175 (Update switch_round for new Widget and Control definitions)
-
     """
 
     # pylint: disable=too-many-instance-attributes, too-many-arguments, too-many-locals
@@ -411,7 +456,7 @@ class SwitchRound(Widget, Control):
             self._width = 4 * self._radius
         else:
             self._width = self.width
-            print('width set!')
+            print("width set!")
 
         if background_outline_color_off is None:
             background_outline_color_off = background_color_off
@@ -629,12 +674,9 @@ class SwitchRound(Widget, Control):
         # Draw the position of the slider.
         # The position parameter is a float between 0 and 1 (0= off, 1= on).
 
-<<<<<<< HEAD
-=======
         # apply the "easing" function to the requested position to adjust motion
         position = easing(position)
 
->>>>>>> 9275175 (Update switch_round for new Widget and Control definitions)
         # Get the position offset from the motion function
         x_offset, y_offset, _ = self._get_offset_position(
             position
@@ -700,7 +742,7 @@ class SwitchRound(Widget, Control):
             # switch is going from on->off or off->on
 
             # constrain the elapsed time
-            elapsed_time=time.monotonic()-start_time
+            elapsed_time = time.monotonic() - start_time
             if elapsed_time > self._animation_time:
                 elapsed_time = self._animation_time
 
@@ -709,9 +751,7 @@ class SwitchRound(Widget, Control):
                     1 - (elapsed_time) / self._animation_time
                 )  # fraction from 0 to 1
             else:
-                position = (
-                    elapsed_time
-                ) / self._animation_time  # fraction from 0 to 1
+                position = (elapsed_time) / self._animation_time  # fraction from 0 to 1
 
             # Update the moving elements based on the current position
             # apply the "easing" function to the requested position to adjust motion

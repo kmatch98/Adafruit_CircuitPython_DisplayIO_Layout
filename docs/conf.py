@@ -10,6 +10,7 @@ import sys
 sys.path.insert(0, os.path.abspath(".."))
 sys.path.append("/Users/margaret/Documents/GitHub/Adafruit_CircuitPython_Display_Shapes/")
 
+
 # -- General configuration ------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -20,7 +21,10 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
+    "sphinx.ext.inheritance_diagram"
 ]
+
+inheritance_graph_attrs = dict(rankdir="TB")
 
 # TODO: Please Read!
 # Uncomment the below if you use native CircuitPython modules such as
@@ -96,6 +100,7 @@ todo_include_todos = False
 todo_emit_warnings = True
 
 napoleon_numpy_docstring = False
+
 
 # -- Options for HTML output ----------------------------------------------
 
