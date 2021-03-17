@@ -93,8 +93,6 @@ class IconWidget(Widget, Control):
         **kwargs,
     ):
 
-        print("kwargs: {}".format(kwargs))
-
         super().__init__(**kwargs)  # initialize superclasses
         super(Control, self).__init__()
 
