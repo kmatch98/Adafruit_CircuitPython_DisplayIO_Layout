@@ -41,6 +41,8 @@ class IconWidget(Widget, Control):
     adafruit_imageload and a text label centered beneath it. Includes optional
     animation to increase the icon size when pressed.
 
+    :param display: the display where the ``IconWidget`` is displayed, this is used for
+     handling animations.
     :param string label_text: the text that will be shown beneath the icon image.
     :param string icon: the filepath of the bmp image to be used as the icon.
     :param boolean on_disk: if True use OnDiskBitmap instead of imageload.
@@ -64,18 +66,6 @@ class IconWidget(Widget, Control):
     :param int max_size: (Optional) this will get passed through to the
      displayio.Group constructor. If omitted we default to
      grid_size width * grid_size height to make room for all (1, 1) sized cells.
-    :param int wheel_initial_value: When using palette animation, this is the initial value
-     of the colorwheel parameter used with ``_pixelbuf.colorwheel``
-    :param int wheel_increment: To add palette animation, set this to the value of
-     how much you want the ``_pixelbuf.colorwheel`` function to increment each time that
-     ``unselected`` is called (default: 0 for no palette animation)
-    :param int wheel_grading: This is the step sized used when calling colorwheel for
-     each color index in the palette (default: 5), basically it's how far apart each
-     color in the palette will be set. Use a low value if you want each color to be
-     close to each other or a high value to spread out into a wider range of colors.
-    :param int palette_skip_indices: integer or list of integers with the palette
-     indices that should not be changed when using the palette animations (default: None)
-
     """
 
     # pylint: disable=bad-super-call, too-many-instance-attributes, too-many-locals
@@ -112,7 +102,6 @@ class IconWidget(Widget, Control):
         self._icon = icon
 
         if on_disk:
-            print("on_disk")
             self._file = open(icon, "rb")
             image = OnDiskBitmap(self._file)
             tile_grid = TileGrid(image, pixel_shader=ColorConverter())
