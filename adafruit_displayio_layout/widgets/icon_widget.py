@@ -41,18 +41,18 @@ class IconWidget(Widget, Control):
     adafruit_imageload and a text label centered beneath it. Includes optional
     animation to increase the icon size when pressed.
 
-    :param display: the display where the ``IconWidget`` is displayed, this is used for
-     handling animations.
-    :param string label_text: the text that will be shown beneath the icon image.
-    :param string icon: the filepath of the bmp image to be used as the icon.
-    :param boolean on_disk: if True use OnDiskBitmap instead of imageload.
+    :param displayio.Display display: the display where the ``IconWidget`` is displayed,
+     used for handling animations.
+    :param str label_text: the text that will be shown beneath the icon image.
+    :param str icon: the filepath of the bmp image to be used as the icon.
+    :param bool on_disk: if True use OnDiskBitmap instead of imageload.
      This can be helpful to save memory. Defaults to False
 
     :param float max_scale: the maximum zoom during animation, set 1.0 for no animation
      a value of 1.4 is a good starting point (default: 1.0, no animation),
      ``max_scale`` must be between 1.0 and 1.5.
-    :param float max_angle: the maximum degrees of rotation during animation, set 0 for
-     no rotation, in degrees (default: 0 degrees)
+    :param float max_angle: the maximum degrees of rotation during animation, positive values
+     are clockwise, set 0 for no rotation, in degrees (default: 0 degrees)
     :param float animation_time: the time for the animation in seconds, set to 0.0 for
      no animation, a value of 0.15 is a good starting point (default: 0.0 seconds)
 
