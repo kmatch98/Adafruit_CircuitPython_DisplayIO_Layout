@@ -18,6 +18,7 @@
 
 .. automodule:: adafruit_displayio_layout.widgets.switch_round
    :members:
+<<<<<<< HEAD
    :member-order: bysource
    :inherited-members:
 
@@ -32,4 +33,7 @@
 
 .. automodule:: adafruit_displayio_layout.widgets.icon_widget
    :members:
+=======
+   :inherited-members:
+>>>>>>> annotation_add
    :member-order: bysource

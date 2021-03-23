@@ -28,7 +28,11 @@ __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_DisplayIO_Layout.
 
 
 class Control:
+<<<<<<< HEAD
     """A Control class for responsive elements, including touch response functions for displays.
+=======
+    """A Control class for responsive elements, including touch response functions.
+>>>>>>> annotation_add
 
     **IMPORTANT**: The *touch_point* for all functions should be in local coordinates
       for this item. That means, any widget should adjust the touchpoint for self.x and

@@ -5,7 +5,11 @@
 
 `switch_round`
 ================================================================================
+<<<<<<< HEAD
 A sliding switch widget with a round shape.
+=======
+CircuitPython GUI Round Sliding Switch Widget
+>>>>>>> annotation_add
 
 * Author(s): Kevin Matocha
 
@@ -40,6 +44,10 @@ from adafruit_display_shapes.roundrect import RoundRect
 from adafruit_display_shapes.rect import Rect
 from adafruit_displayio_layout.widgets.widget import Widget
 from adafruit_displayio_layout.widgets.control import Control
+from adafruit_displayio_layout.widgets.easing import BackEaseInOut as easing
+
+__version__ = "0.0.0-auto.0"
+__repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_DisplayIO_Layout.git"
 
 # modify the "easing" function that is imported to change the switch animation behaviour
 from adafruit_displayio_layout.widgets.easing import back_easeinout as easing
@@ -50,6 +58,7 @@ __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_DisplayIO_Layout.
 
 
 class SwitchRound(Widget, Control):
+<<<<<<< HEAD
 
     """
     .. note:: Jump directly to:
@@ -59,6 +68,9 @@ class SwitchRound(Widget, Control):
         - :ref:`SwitchRound: Description of implementation <links>`
 
     .. _parameters:
+=======
+    """A horizontal sliding switch widget.
+>>>>>>> annotation_add
 
     :param int x: pixel position, defaults to 0
     :param int y: pixel position, defaults to 0
@@ -105,6 +117,7 @@ class SwitchRound(Widget, Control):
      value is 0.2 seconds.
     :param Boolean value: the initial value for the switch, default is False
 
+<<<<<<< HEAD
     .. _links:
 
     **Sections: Description of the SwitchRound widget**
@@ -231,6 +244,31 @@ class SwitchRound(Widget, Control):
     .. _internals:
 
     **Internal details: How the SwitchRound widget works**
+=======
+    **SwitchRound Features**
+
+    The `SwitchRound` widget is a sliding switch that changes state whenever it is
+    touched.  The color gradually changes from the off-state color scheme to the
+    on-state color scheme as the switch transfers from off to the on position.
+    The switch has an optional display of "0" and "1" on the sliding switch.  The
+    switch can be oriented using the ``horizontal`` input variable, and the sliding
+    direction can be changed using the ``flip`` input variable.  The duration of
+    animation between on/off can be set using the ``animation_time`` input variable.
+    Regarding switch sizing, it is recommended to set the height dimension but to
+    leave the width as None.  Setting width to None will allow the width to resize
+    to maintain a recommended aspect ration of width/height.  Alternately, the switch
+    can be resized using the `resize` command, and it will adjust the width and height
+    to the maximum size that will fit inside the requested width and height dimensions,
+    while keeping the preferred aspect ratio.  To make the switch easier to be selected,
+    additional padding around the switch can be defined using the ``touch_padding`` input
+    variable to increase the touch-responsive area.
+
+    The following sections provide details on the construction of the switch
+    as an introductory guide to using the `Widget` and `Control` classes for create
+    touch-responsive graphical user interface widgets.
+
+    **Details of the SwitchRound widget**
+>>>>>>> annotation_add
 
     The `SwitchRound` widget is a graphical element that responds to touch elements
     to provide sliding switch on/off behavior.  Whenever touched, the switch toggles
@@ -238,6 +276,7 @@ class SwitchRound(Widget, Control):
     `SwitchRound` widget, in the hopes that it will serve as a first example of the key
     properties and responses for widgets.
 
+<<<<<<< HEAD
     The `SwitchRound` widget inherits from two classes, it is a subclass of `Widget` (which
     itself is a subclass of `displayio.Group`) and a subclass of `Control`.  The `Widget`
     class helps define the positioning and sizing of the switch, while the `Control` class
@@ -393,10 +432,149 @@ class SwitchRound(Widget, Control):
         I hope this `SwitchRound` widget will help turn on some new ideas and highlight some
         of the new capabilities of the `Widget` and `Control` classes.  Now go see what else
         you can create and extend from here!
+=======
+    The `SwitchRound` widget inherits from two classes, it is a subclass of Group->Widget
+    and a subclass of Control.  The `Widget` class helps define the positioning and
+    sizing of the switch, while the `Control` class defines the touch-response behavior.
+
+    **Group structure: Display elements that make up SwitchRound**
+
+    The Widget is a subclass of ``displayio.Group``, thus we can append graphical
+    elements to the Widget for displaying on the screen.  The switch consists of the
+    following graphical elements:
+
+    0. switch_roundrect: The switch background
+    1. switch_circle: The switch button that slides back and forth
+    2. Optional: text_0: The "0" circle shape on the switch button
+    3. Optional: text_1: The "1" rectangle shape on the switch button
+
+    The optional text items can be displayed or hidden using the ``display_button_text``
+    input variable.
+
+    **Coordinate systems and use of anchor_point and anchored_position**
+
+    See the `Widget` class definition for clarification on the methods for positioning
+    the switch, including the difference in the display coordinate system and the Widget's
+    local coordinate system.
+
+    **The Widget construction sequence**
+
+    Here is the set of steps that are used to define this switch widget.
+
+    1. Initialize the stationary items
+    2. Initialize the moving display elements
+    3. Store initial position of the moving display elements
+    4. Define "keyframes" to determine the translation vector
+    5. Define the ``_draw_position`` function between 0.0 to 1.0 (and slightly beyond)
+    6. Select the motion "easing" function
+    7. **Extra**. Go check out the ``_animate_switch`` method
+
+    First, the stationary background rounded rectangle (RoundRect is created).  Second,
+    the moving display elements are created, the circle for the switch, the circle for
+    the text "0" and the rectangle for the text "1". Note that either the "0" or "1" is
+    set as hidden, depending upon the switch value.  Third, we store away the
+    initial position of the three moving elements, these initial values will be used in the
+    functions that move these display elements.  Next, we define the motion of the
+    moving element, by setting the ``self._x_motion`` and ``self._y_motion`` values
+    that depending upon the ``horizontal`` and ``flip`` variables. These motion variables
+    set the two "keyframes" for the moving elements, basically the endpoints of the switch
+    motion.  (Note: other widgets may need an ``_angle_motion`` variable if they require
+    some form of rotation.)  Next, we define the ``_draw_function`` method.  This method
+    takes an input between 0.0 and 1.0 and adjusts the position relative to the motion
+    variables, where 0.0 is the initial position and 1.0 represents the final position
+    (as defined by the ``_x_motion`` and ``_y_motion`` values).  In the case of the
+    sliding switch, we also use this ``position`` value (0.0 to 1.0) to gradually
+    grade the color of the components between their "on" and "off" colors.
+
+    **Making it move**
+
+    Everything above has set the ground rules for motion, but doesn't cause it to move.
+    However, you have set almost all the pieces in place to respond to requests to change
+    the position.  All that is left is the **Extra** method that performs the animation,
+    called ``_animate_switch``. The ``animate_switch`` method is triggered by a touch
+    event through the ``selected`` Control class method.  Once triggered, this method
+    checks how much time has elapsed.  Based on the elapsed time and the ``animation_time``
+    input variable, the ``animate_switch`` function calculates the ``position`` where
+    the switch should be.  Then, it takes this ``position`` to call the ``_draw_position``
+    method that will update the display elements based on the requested position.
+
+    But there's even one more trick to the animation.  The ``animate_switch`` calculates
+    the target position based on a linear relationship between the time and the position.
+    However, to give the animation a better "feel", it is desirable to tweak the motion
+    function depending upon how this widget should behave or what suits your fancy. To
+    do this we can use an "easing" function.  In short, this adjusts the constant speed
+    (linear) movement to a variable speed during the movement.  Said another way, it
+    changes the position versus time function according to a specific waveform equation.
+    There are a lot of different "easing" functions that folks have used or you can make
+    up your own.  Some common easing functions are provided in the ``easing.py`` file.
+    You can change the easing function based on changing which function is imported
+    at the top of this file. You can see where the position is tweaked by the easing
+    function in the line in the ``_animate_switch`` method:
+
+        .. code-block::python
+
+        self._draw_position(easing(position))  # update the switch position
+
+    Go play around with the different easing functions and observe how the motion
+    behavior changes.  You can use these functions in multiple dimensions to get all
+    varieties of behavior that you can take advantage of.  Here's a good website
+    that lets you visualize some of the behavior of the easing functions:
+    <https://easings.net>.  Note: Some of the "springy" easing functions have values
+    slightly below 0.0 and slightly above 1.0, so if you want to use these, be sure
+    to check that your ``_draw_position`` method behaves itself for that larger range
+    of position inputs.
+
+    **Orientation and a peculiarity of width and height definitions for SwitchRound**
+
+    In setting the switch sizing, use height and width to set the narrow and wide
+    dimension of the switch.  To try and reduce confusion, the orientation is modified
+    after the height and width are selected.  That is, if the switch is set to vertical,
+    the height and still mean the "narrow" and the width will still mean the dimensions
+    in the direction of the sliding.
+
+    If you need the switch to fit within a specific bounding box, it's preferred to use
+    the ``resize`` function.  This will put the switch (in whatever orientation) at the
+    maximum size where it can fit within the bounding box that you specified.  The switch
+    aspect ratio will remain at the "preferred" aspect ratio of of 2:1 (width to height)
+    after the resizing.
+
+    **Setting the touch response boundary**
+
+    The touch response area is defined by the Control class variable called
+    ``touch_boundary``. In the case of the `SwitchRound` widget, we provide an
+    ``touch_padding`` input variable.  The use of ``touch_padding`` defines an
+    additional number of pixels surrounding the display elements that respond to touch
+    events.  To achieve this additional space, the ``touch_boundary`` increases in size
+    in all dimensions by the number of pixels specified in the ``touch_padding`` parameter.
+
+    The ``touch_boundary`` is used in the Control function ``contains`` that checks
+    whether any touch_points are within the boundary. Please pay particular attention to
+    the `SwitchRound` contains function, since it calls the `Control.contains` superclass
+    function with the touch_point value adjusted for the switch's ``.x`` and ``.y`` values.
+    This offset adjustment is required since the `Control.contains` function operates only
+    on the widget's local coordinate system.  It's good to keep in mind which coordinate
+    system you are working in, so you'll write your code to respond to the right inputs!
+
+    **Summary**
+
+    The `SwitchRound` widget is an example to explain the use of the `Widget` and `Control`
+    class functions.  The `Widget` class handles the overall sizing and positioning function
+    and is the group that holds all the graphical elements.  The `Control` class is used to
+    define the response of the widget to touch events (or could be generalized to other
+    inputs).  Anything that only displays (such as a graph or an indicator light) won't
+    need to inherit the `Control` class.  But anything that responds to touch inputs should
+    inherit the `Control` class to define the ``touch_boundary`` and the touch response
+    functions.
+
+    I hope this `SwitchRound` widget will help turn on some new ideas and highlight some
+    of the new capabilities of the `Widget` and `Control` classes.  Now go see what else
+    you can create and extend from here!
+>>>>>>> annotation_add
 
     **A Final Word**
 
     The design of the Widget and Control classes are open for inputs.  If you think
+<<<<<<< HEAD
     a additions or changes are useful, add it and please submit a pull request so
     others can use it too!  Also, keep in mind you don't even need to follow these classes
     to get the job done.  The Widget and Class definitions are designed to give guidance
@@ -411,6 +589,17 @@ class SwitchRound(Widget, Control):
     .. _methods:
 
     **SwitchRound methods**
+=======
+    an addition or change will be useful, add it and please submit a pull request so
+    other can use it too!  Also, keep in mind you don't even need to follow these classes
+    to get the job done.  The Widget and Class definitions are designed to give guidance
+    about one way to make things work, and try to share some code.  If it's standing in
+    your way, do something else!  If you want to use the ``grid_layout`` or other layout tools
+    in this library, you only *really* need to have methods for positioning and resizing.
+    **Don't let any of these class definitions hold you back, let your imagination run
+    wild and make some cool widgets!**
+
+>>>>>>> annotation_add
 
     """
 
@@ -472,7 +661,11 @@ class SwitchRound(Widget, Control):
             self._width = 4 * self._radius
         else:
             self._width = self.width
+<<<<<<< HEAD
             print("width set!")
+=======
+            print('width set!')
+>>>>>>> annotation_add
 
         if background_outline_color_off is None:
             background_outline_color_off = background_color_off
@@ -758,7 +951,11 @@ class SwitchRound(Widget, Control):
             # switch is going from on->off or off->on
 
             # constrain the elapsed time
+<<<<<<< HEAD
             elapsed_time = time.monotonic() - start_time
+=======
+            elapsed_time=time.monotonic()-start_time
+>>>>>>> annotation_add
             if elapsed_time > self._animation_time:
                 elapsed_time = self._animation_time
 
@@ -767,7 +964,13 @@ class SwitchRound(Widget, Control):
                     1 - (elapsed_time) / self._animation_time
                 )  # fraction from 0 to 1
             else:
+<<<<<<< HEAD
                 position = (elapsed_time) / self._animation_time  # fraction from 0 to 1
+=======
+                position = (
+                    elapsed_time
+                ) / self._animation_time  # fraction from 0 to 1
+>>>>>>> annotation_add
 
             # Update the moving elements based on the current position
             # apply the "easing" function to the requested position to adjust motion

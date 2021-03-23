@@ -25,6 +25,11 @@ Implementation Notes
 # pylint: disable=too-many-locals, too-many-statements
 
 
+<<<<<<< HEAD
+=======
+# import time
+# import terminalio
+>>>>>>> annotation_add
 import math
 import displayio
 import vectorio
@@ -89,6 +94,17 @@ class Dial(Widget):
 
     :param int background_color: background color (RGB tuple
      or 24-bit hex value), set None for transparent
+<<<<<<< HEAD
+=======
+
+    ..figure:: gui_layout_coordinates.png
+      :scale: 50 %
+      :alt: Diagram of layout coordinates
+
+      Diagram showing the global and local coordinates and the associated
+      class variables.
+    """
+>>>>>>> annotation_add
 
 
     :param (float,float) anchor_point: (X,Y) values from 0.0 to 1.0 to define the dial's
@@ -187,7 +203,11 @@ class Dial(Widget):
         minor_tick_stroke=1,
         minor_tick_length=5,
         tick_label_font=None,
+<<<<<<< HEAD
         tick_label_color=0xFFFFFF,
+=======
+        tick_label_color=0x880000,
+>>>>>>> annotation_add
         rotate_tick_labels=True,
         tick_label_scale=1.0,
         background_color=None,
@@ -209,10 +229,20 @@ class Dial(Widget):
         #  1. Value label (optional)
         #  2. Needle bitmap
 
+<<<<<<< HEAD
         self._min_value = min_value
         self._max_value = max_value
         if value is None:  # if none, set to the minimum value
             self._value = self._min_value
+=======
+        self._value = value
+
+        self.value_font = value_font
+        if value_font is None:
+            # import terminalio
+            # self.value_font = terminalio.FONT
+            pass
+>>>>>>> annotation_add
         else:
             self._value = value
 
